@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5f0">
+  <title>부자공인중개사 | 임대 수익률 계산기</title>
+  <style>
+    :root{--ink:#19251f;--muted:#66736b;--line:#e1e7e1;--green:#263765;--lime:#dce6ff;--paper:#fff;--bg:#f5f5f0;--soft:#eef1f8}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;letter-spacing:-.025em}
+    .wrap{width:min(1080px,100% - 40px);margin:0 auto;padding:42px 0 56px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:38px}.brand{font-size:14px;font-weight:800;letter-spacing:.02em;display:flex;gap:10px;align-items:center}.mark{width:30px;height:30px;border-radius:10px;background:var(--green);color:var(--lime);display:grid;place-items:center;font-size:17px}.tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:8px 12px;border-radius:99px}
+    .intro{margin-bottom:28px}.eyebrow{font-size:12px;color:var(--green);font-weight:800;letter-spacing:.14em;text-transform:uppercase}.intro h1{font-size:clamp(30px,5vw,48px);line-height:1.13;letter-spacing:-.06em;margin:12px 0 10px}.intro p{color:var(--muted);margin:0;font-size:15px}
+    .layout{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:stretch}.card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 8px 28px #14251a08}.card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:21px}.card h2{font-size:17px;margin:0;letter-spacing:-.04em}.unit{font-size:12px;color:var(--muted);background:var(--soft);padding:7px 10px;border-radius:8px}
+    .fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field label{display:flex;justify-content:space-between;gap:6px;font-size:13px;font-weight:700;margin:0 0 8px}.loan-label-row{display:flex;align-items:center;justify-content:space-between;margin:0 0 8px}.loan-label-row label{margin:0}.no-loan{border:1px solid #dce3dc;border-radius:7px;background:var(--soft);padding:4px 8px;color:var(--green);font-family:inherit;font-size:11px;font-weight:600;cursor:pointer}.no-loan:hover{border-color:var(--green);background:#e3e9f5}.hint{font-size:11px;color:#87928a;font-weight:500}.input-wrap{position:relative}.input-wrap input{width:100%;height:50px;border:1px solid #dce3dc;border-radius:11px;padding:0 44px 0 14px;font-family:inherit;font-size:16px;font-weight:600;color:var(--ink);outline:0;background:#fff;transition:.15s}.input-wrap input:focus{border-color:var(--green);box-shadow:0 0 0 3px #26376514}.input-wrap input::placeholder{color:#c0c9c1;font-weight:400}.suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:13px;color:#87928a;pointer-events:none}.span2{grid-column:span 2}.note{font-size:12px;color:var(--muted);line-height:1.65;margin:17px 0 0;padding-top:14px;border-top:1px solid var(--line)}
+    .result{background:var(--green);color:white;border:0;position:relative;overflow:hidden;display:flex;flex-direction:column}.result:after{content:"";position:absolute;width:250px;height:250px;border:1px solid #ffffff14;border-radius:50%;right:-95px;top:-100px;box-shadow:0 0 0 28px #ffffff08,0 0 0 58px #ffffff05;pointer-events:none}.result .card-head{position:relative;z-index:1}.result h2{color:white}.live{display:flex;align-items:center;gap:7px;color:#d9e7dc;font-size:12px}.dot{width:7px;height:7px;border-radius:50%;background:var(--lime)}.hero{position:relative;z-index:1;padding:17px 0 23px;border-bottom:1px solid #ffffff2c}.hero-label{font-size:13px;color:#d9e7dc}.hero-value{font-size:clamp(42px,6vw,64px);font-weight:800;letter-spacing:-.065em;line-height:1.15;margin-top:7px}.hero-value small{font-size:19px;letter-spacing:-.03em;margin-left:4px}.hero-sub{font-size:13px;color:#d9e7dc;margin-top:7px}.metrics{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.metric{background:#ffffff12;border:1px solid #ffffff16;border-radius:14px;padding:15px}.metric-label{font-size:12px;color:#d9e7dc}.metric-value{font-size:23px;font-weight:750;letter-spacing:-.05em;margin-top:8px;white-space:nowrap}.metric-value small{font-size:12px;font-weight:500;margin-left:3px;color:#d9e7dc}.formula{position:relative;z-index:1;margin-top:auto;padding-top:20px;font-size:11px;color:#d9e7dc;line-height:1.7}.formula strong{color:#fff}.empty .hero-value,.empty .metric-value{color:#a4b8a8}.footer{display:flex;justify-content:space-between;gap:20px;margin-top:17px;color:#8a958d;font-size:11px}.footer span:last-child{text-align:right}
+    @media(max-width:760px){.wrap{width:min(100% - 28px,520px);padding:24px 0 34px}.top{margin-bottom:29px}.tag{font-size:11px;padding:7px 9px}.intro{margin-bottom:21px}.intro p{font-size:14px;line-height:1.5}.layout{grid-template-columns:1fr;gap:13px}.card{padding:21px;border-radius:18px}.fields{gap:13px}.result{min-height:310px}.hero{padding:12px 0 19px}.hero-value{font-size:52px}.metric-value{font-size:21px}.footer{font-size:10px}}
+    @media(max-width:390px){.fields{grid-template-columns:1fr}.span2{grid-column:auto}.tag{max-width:140px;text-align:center}.card{padding:18px}.metrics{gap:9px}.metric{padding:13px 11px}.metric-value{font-size:19px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="top"><div class="brand"><span class="mark">↗</span> 부자공인중개사</div><span class="tag">상가 · 오피스텔</span></header>
+    <section class="intro"><div class="eyebrow">RENTAL YIELD CALCULATOR</div><h1>이 매물, 수익이<br>얼마나 남을까요?</h1><p>조건을 입력하면 실투자금과 월 순수익, 연 수익률을 바로 계산해요.</p></section>
+    <section class="layout">
+      <div class="card">
+        <div class="card-head"><h2>매물 조건 입력</h2><span class="unit">금액 단위 · 만원</span></div>
+        <div class="fields">
+          <div class="field"><label for="price">매매가 <span class="hint">필수</span></label><div class="input-wrap"><input id="price" inputmode="decimal" placeholder="예: 50,000" autocomplete="off"><span class="suffix">만원</span></div></div>
+          <div class="field"><label for="deposit">임대 보증금 <span class="hint">필수</span></label><div class="input-wrap"><input id="deposit" inputmode="decimal" placeholder="예: 3,000" autocomplete="off"><span class="suffix">만원</span></div></div>
+          <div class="field"><label for="rent">월세 <span class="hint">필수</span></label><div class="input-wrap"><input id="rent" inputmode="decimal" placeholder="예: 250" autocomplete="off"><span class="suffix">만원</span></div></div>
+          <div class="field"><div class="loan-label-row"><label for="loan">대출금</label><button class="no-loan" id="noLoan" type="button">대출 없음</button></div><div class="input-wrap"><input id="loan" inputmode="decimal" placeholder="예: 20,000" autocomplete="off"><span class="suffix">만원</span></div></div>
+          <div class="field"><label for="rate">대출 금리 <span class="hint">연 기준</span></label><div class="input-wrap"><input id="rate" inputmode="decimal" placeholder="예: 4.5" autocomplete="off"><span class="suffix">%</span></div></div>
+          <div class="field"><label for="tax">취득세</label><div class="input-wrap"><input id="tax" inputmode="decimal" placeholder="예: 2,000" autocomplete="off"><span class="suffix">만원</span></div></div>
+          <div class="field span2"><label for="cost">부대비용 <span class="hint">중개수수료·법무비 등</span></label><div class="input-wrap"><input id="cost" inputmode="decimal" placeholder="예: 500" autocomplete="off"><span class="suffix">만원</span></div></div>
+        </div>
+        <p class="note">입력값은 이 기기에서만 계산에 사용되며 저장되거나 전송되지 않습니다.</p>
+      </div>
+      <div class="card result empty" id="result">
+        <div class="card-head"><h2>예상 수익</h2><span class="live"><i class="dot"></i> 실시간 계산</span></div>
+        <div class="hero"><div class="hero-label">연 수익률</div><div class="hero-value" id="yield">—<small>%</small></div><div class="hero-sub" id="yieldSub">입력값을 채우면 결과가 표시됩니다</div></div>
+        <div class="metrics"><div class="metric"><div class="metric-label">실투자금</div><div class="metric-value" id="equity">—<small>만원</small></div></div><div class="metric"><div class="metric-label">월 순수익</div><div class="metric-value" id="net">—<small>만원</small></div></div></div>
+        <div class="formula"><strong>계산 기준</strong> · 실투자금 = 매매가 − 보증금 − 대출금 + 취득세 + 부대비용<br>월 순수익 = 월세 − 월 대출이자(이자만 계산) · 연 수익률 = 월 순수익 × 12 ÷ 실투자금</div>
+      </div>
+    </section>
+    <footer class="footer"><span>간편 비교용 계산 결과입니다.</span><span>공실·관리비·세금·원금상환은 반영되지 않습니다.</span></footer>
+  </main>
+  <script>
+    const ids=['price','deposit','rent','loan','rate','tax','cost'];
+    const fields=Object.fromEntries(ids.map(id=>[id,document.getElementById(id)]));
+    const number=id=>Number((fields[id].value||'').replace(/,/g,'').trim());
+    const fmt=(n,d=0)=>new Intl.NumberFormat('ko-KR',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n);
+    function update(){
+      for(const id of ids){const el=fields[id];const raw=el.value.replace(/,/g,'').replace(/[^\d.]/g,'');if(raw!==el.value.replace(/,/g,''))el.value=raw;}
+      const required=['price','deposit','rent','loan','rate','tax','cost'];
+      const complete=required.every(id=>fields[id].value.trim()!=='');
+      const panel=document.getElementById('result');panel.classList.toggle('empty',!complete);
+      if(!complete){document.getElementById('yield').innerHTML='—<small>%</small>';document.getElementById('equity').innerHTML='—<small>만원</small>';document.getElementById('net').innerHTML='—<small>만원</small>';document.getElementById('yieldSub').textContent='입력값을 채우면 결과가 표시됩니다';return;}
+      const equity=number('price')-number('deposit')-number('loan')+number('tax')+number('cost');
+      const net=number('rent')-(number('loan')*number('rate')/100/12);
+      const rate=equity>0?(net*12/equity*100):NaN;
+      document.getElementById('equity').innerHTML=`${fmt(equity)}<small>만원</small>`;
+      document.getElementById('net').innerHTML=`${fmt(net)}<small>만원</small>`;
+      document.getElementById('yield').innerHTML=Number.isFinite(rate)?`${fmt(rate,2)}<small>%</small>`:'계산 불가';
+      document.getElementById('yieldSub').textContent=equity>0?'실투자금 대비 세전 예상 수익률':'실투자금이 0보다 커야 계산됩니다';
+    }
+    ids.forEach(id=>fields[id].addEventListener('input',update));
+    document.getElementById('noLoan').addEventListener('click',()=>{
+      fields.loan.value='0';
+      fields.rate.value='0';
+      update();
+    });
+  </script>
+</body>
+</html>
